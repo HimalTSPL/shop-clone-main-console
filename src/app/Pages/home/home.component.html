@@ -1,0 +1,53 @@
+<div class="container">
+  <div>
+    <Button class="btn btn-primary my-3" routerLink="/cart">Go To Cart</Button>
+  </div>
+  <div *ngIf="!getProductsList.length">
+    <div class="alert alert-danger my-3" role="alert">
+      No records are there!!!
+    </div>
+  </div>
+  <div class="row">
+    <!-- card show as a  flex -->
+    <div class="col-sm-3 my-3" *ngFor="let item of getProductsList">
+      <div class="card">
+        <div class="card-body">
+          <label class="card-title">
+            {{ item.productscategory }}
+          </label>
+          <h3 class="card-title">
+            {{ item.productsName }}
+          </h3>
+          <h5 class="card-title">{{ item.productsPrice }}₹</h5>
+          <a>
+            Quantity:
+            <button class="round" (click)="removeQuntity(item)">-</button>
+            <a>{{ item.userQuantity.value }}</a>
+            <button class="round" (click)="addQuntity(item)">+</button>
+          </a>
+
+          <p class="card-text">
+            {{ item.productsDescription }}
+          </p>
+          <!-- (click)="addToCart(item.productsID)" -->
+          <button
+            *ngIf="userLogIn()"
+            type="submit"
+            class="btn btn-primary me-2"
+            (click)="addToCart(item)"
+          >
+            Add to Cart
+          </button>
+          <button
+            *ngIf="userLogIn()"
+            type="submit"
+            class="btn btn-success me-2"
+            (click)="buyProducts(item.productsID)"
+          >
+            Buy
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

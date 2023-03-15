@@ -1,0 +1,111 @@
+<div class="container align-items-center rounded shadow my-5 py-3">
+  <form [formGroup]="addProductsForm">
+    <div class="from-group mb-3">
+      <label class="form-label">Product Category</label>
+      <input
+        type="text"
+        class="form-control"
+        name="productCategory"
+        formControlName="productCategory"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="pCategory && pCategory.invalid && pCategory.touched">
+        This Product category is inavlid!!</span
+      >
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">products Name</label>
+      <input
+        type="text"
+        class="form-control"
+        name="productName"
+        formControlName="productName"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="pName && pName.invalid && pName.touched">
+        This Product Name is inavlid!!</span
+      >
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">products Price</label>
+      <input
+        type="text"
+        class="form-control"
+        name="productPrice"
+        formControlName="productPrice"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="pPrice && pPrice.invalid && pPrice.touched">
+        This Product price is inavlid!!</span
+      >
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">products Quantity</label>
+      <input
+        type="number"
+        class="form-control"
+        name="productQuantity"
+        formControlName="productQuantity"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="pQuantity && pQuantity.invalid && pQuantity.touched">
+        This Product Max Quantity is 10!!</span
+      >
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">products Image</label>
+      <input type="file" class="form-control "  accept="image/*" name="productImage" formControlName="productImage" (change)="preview($event)" multiple required />
+      <!-- <img [src]="url" [alt]="urlName"> -->
+    </div>
+    <div *ngIf="urls">
+      <img *ngFor="let item of urls" height="200" width="70" class="img-thumbnail me-2" [src]="item?.url" [alt]="item?.name">
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">Description</label>
+      <textarea
+        type="textarea"
+        class="form-control"
+        name="productDescription"
+        formControlName="productDescription"
+        required
+      ></textarea>
+    </div>
+    <div class="text-danger">
+      <span
+        *ngIf="pDescription && pDescription.invalid && pDescription.touched"
+      >
+        Product Description Must be fill!!</span
+      >
+    </div>
+      <!-- [disabled]="addProductsForm.invalid" -->
+    <button
+      type="submit"
+      class="btn btn-success me-2"
+      *ngIf="!editMode"
+      (click)="registerProducts()"
+
+    >
+      Add
+    </button>
+    <button
+      type="button"
+      class="btn btn-success me-2"
+      *ngIf="editMode"
+      (click)="update()"
+    >
+      Update
+    </button>
+
+    <button type="button" class="btn btn-danger me-2" (click)="cancel()">
+      Cancel
+    </button>
+  </form>
+</div>

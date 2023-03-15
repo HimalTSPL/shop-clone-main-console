@@ -1,0 +1,71 @@
+<div class="container align-items-center rounded shadow my-5 py-3">
+  <form [formGroup]="loginForm" (ngSubmit)="signinUser()">
+    <div class="mb-3">
+      <label class="form-label">Email or userName</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="loginEmail && loginEmail.invalid && loginEmail.touched">
+        This Email or userName is inavlid!!</span
+      >
+    </div>
+    <div class="mb-3">
+      <label class="form-label">Password</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="password"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span
+        *ngIf="
+          !submitted &&
+          loginPass &&
+          loginForm.invalid &&
+          loginPass.invalid &&
+          loginPass.touched
+        "
+      >
+        please enter valid password!!</span
+      >
+    </div>
+    <!-- <div class="text-danger">
+      <span *ngIf="loginPass && loginPass.invalid && loginPass.touched">
+        please enter valid password!!</span
+      >
+    </div>
+    <div class="text-danger">
+      <span *ngIf="loginForm && loginForm.invalid && loginForm.touched">
+        please enter valid details!!</span
+      >
+    </div> -->
+    <div class="mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <div>
+      <button
+        type="submit"
+        class="btn btn-success me-3"
+        [disabled]="loginForm.invalid"
+      >
+        Login
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary"
+        routerLink="/registration"
+        routerLinkActive="active"
+      >
+        SignUp
+      </button>
+    </div>
+  </form>
+</div>

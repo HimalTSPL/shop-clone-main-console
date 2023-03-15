@@ -1,0 +1,36 @@
+<div class="container rounded shadow mt-3 py-3">
+  <div class="d-flex flex-row justify-content-between">
+    <h4>Request</h4>
+  </div>
+
+  <div class="container rounded shadow py-5">
+    <button (click)="perviousMonth()">previous</button> &nbsp;
+    <select (change)="selectMonth($event)" name="month" id="month">
+      <option *ngFor="let item of month" value="{{ item.id }}">
+        {{ item.name }}
+      </option>
+    </select>&nbsp;
+    <select (change)="selectYear($event)" name="year" id="year">
+      <option *ngFor="let year of years" value="{{ year }}">
+        {{ year }}
+      </option>
+    </select>
+    &nbsp;
+    <button (click)="nextMonth()">next</button>
+
+    <div class="py-3">
+      <div class="card" style="width: 8rem">
+        <div class="card-body">
+          <h5 class="card-title">1</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <span *ngFor="let item of a">
+    <span *ngIf="item.age == 20? item.name == item.name + 'vald' :  'null'">
+      <p> Name: {{item.name}} Age: {{item.age}} </p>
+    </span>
+  </span>
+
+</div>

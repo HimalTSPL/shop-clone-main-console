@@ -1,0 +1,99 @@
+<div class="container rounded shadow py-3">
+  <div class="d-flex flex-row justify-content-between">
+    <div>
+      <button
+        type="submit"
+        class="btn btn-success me-2 rounded shadow"
+        [routerLink]="['/temp-add', 'add']"
+        *ngIf="userLogIn() && adminLogin()"
+      >
+        Add Products
+      </button>
+    </div>
+    <div>
+      <input
+        type="search"
+        class="rounded shadow"
+        placeholder="search products"
+        #items
+        (change)="search(items.value)"
+      />
+      <!-- <button type="submit" class="btn btn-primary ms-2 rounded shadow">
+        Search
+      </button> -->
+    </div>
+  </div>
+  <div class="container rounded shadow py-3">
+    <div>
+      <table border="1">
+        <tbody>
+          <th>Index</th>
+          <th>Category</th>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Quantity</th>
+          <th>Description</th>
+          <!-- <th>Date</th> -->
+          <th>Action</th>
+        </tbody>
+        <tr *ngFor="let data of alldata; let i = index">
+          <td>{{ i + 1 }}</td>
+          <td>{{ data.productsCategory }}</td>
+          <td>{{ data.productsName }}</td>
+          <td>{{ data.productsPrice }}₹</td>
+          <td>{{ data.productsQuantity }}</td>
+          <td>{{ data.productsDescription }}</td>
+          <!-- <td>{{ data.date }}</td> -->
+          <td>
+            <button
+              class="btn btn-success"
+              [routerLink]="['/temp-add', data._id]"
+            >
+              Edit
+            </button>
+            &nbsp;
+            <button class="btn btn-danger" (click)="deletedata(data._id)">
+              Delete
+            </button>
+          </td>
+        </tr>
+      </table>
+      <button
+        class="btn btn-primary my-3"
+        *ngIf="userLogIn() && adminLogin()"
+        routerLink="/pagination"
+      >
+        pagination
+      </button>
+    </div>
+    <div class="text-end py-3">
+      <label>item per page:</label>&nbsp;
+      <select
+        name="page"
+        id="selectPage"
+        (change)="onSelected($event)"
+      >
+        <option value="2">2</option>
+        <option value="5">5</option>
+        <!-- <option value="7">7</option> -->
+        <option value="10">10</option></select
+      >&nbsp;
+
+      <a> {{ startPage }} - {{ endPage }} of {{ allpage }}</a> &nbsp;
+      <input type="button" (click)="getFirstPage()" value="first" />
+      <button
+        type="button"
+        id="previous"
+        (click)="getPreviousPage()"
+        [disabled]="currentPage <= 1"
+      >Previous</button>
+      <button
+        type="button"
+        id="next"
+        [disabled]="currentPage >= maxpage "
+        (click)="getNextPage()"
+        >Next</button>
+      <input type="button" id="last" (click)="getLastPage()" value="last" />
+    </div>
+  </div>
+</div>

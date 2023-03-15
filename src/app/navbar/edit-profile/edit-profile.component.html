@@ -1,0 +1,79 @@
+<div class="container my-3 align-items-center rounded shadow py-3">
+  <form [formGroup]="updateUserForm" (ngSubmit)="updateUser()">
+    <h2> Welecome,<strong> {{ userName }}</strong></h2>
+    <h3><b>Account Details</b></h3>
+    <div class="from-group mb-3">
+      <label class="form-label">User Name</label>
+      <input
+        type="text"
+        class="form-control"
+        Name="userName"
+        formControlName="userName"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="userData && userData.invalid && userData.touched">
+        This user Name is inavlid!!</span
+      >
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">Email address</label>
+      <input
+        type="email"
+        class="form-control"
+        formControlName="email"
+        email
+        required
+      />
+      <div class="text-danger">
+        <span *ngIf="email && email.invalid && email.touched">
+          This Email is inavlid!!</span
+        >
+      </div>
+      <div class="form-text">
+        We'll never share your email with anyone else.
+      </div>
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">Password</label>
+      <input
+        type="text"
+        class="form-control"
+        formControlName="password"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="pass && pass.invalid && pass.touched">
+        This password is inavlid!!</span
+      >
+    </div>
+    <div class="from-group mb-3">
+      <label class="form-label">Confirm Password</label>
+      <input
+        type="Password"
+        class="form-control"
+        formControlName="coPassword"
+        required
+      />
+    </div>
+    <div class="text-danger">
+      <span *ngIf="coPass && coPass.invalid && coPass.touched">
+        This Confirm password is inavlid!!</span
+      >
+    </div>
+    <div class="text-danger">
+      <span *ngIf="updateUserForm.errors"> type password must be valid!!</span>
+    </div>
+
+    <div class="from-group mb-3 form-check">
+      <input type="checkbox" class="form-check-input" id="exampleCheck1" />
+      <label class="form-check-label">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-success me-3">Update</button>
+    <button type="submit" class="btn btn-primary" (click)="onClose()">
+      Cancel
+    </button>
+  </form>
+</div>

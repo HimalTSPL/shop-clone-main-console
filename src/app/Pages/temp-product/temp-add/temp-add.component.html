@@ -1,0 +1,109 @@
+<div class="container rounded shadow py-3">
+  <div class="container align-items-center rounded shadow py-3">
+    <form [formGroup]="addProductsForm">
+      <div class="from-group mb-3">
+        <label class="form-label">Product Category</label>
+        <input
+          type="text"
+          class="form-control"
+          name="productsCategory"
+          formControlName="productsCategory"
+          required
+        />
+      </div>
+      <div class="text-danger">
+        <span *ngIf="pCategory && pCategory.invalid && pCategory.touched">
+          This Product category is inavlid!!</span
+        >
+      </div>
+      <div class="from-group mb-3">
+        <label class="form-label">products Name</label>
+        <input
+          type="text"
+          class="form-control"
+          name="productsName"
+          formControlName="productsName"
+          required
+        />
+      </div>
+      <div class="text-danger">
+        <span *ngIf="pName && pName.invalid && pName.touched">
+          This Product Name is inavlid!!</span
+        >
+      </div>
+      <div class="from-group mb-3">
+        <label class="form-label">products Price</label>
+        <input
+          type="text"
+          class="form-control"
+          name="productsPrice"
+          formControlName="productsPrice"
+          required
+        />
+      </div>
+      <div class="text-danger">
+        <span *ngIf="pPrice && pPrice.invalid && pPrice.touched">
+          This Product price is inavlid!!</span
+        >
+      </div>
+      <div class="from-group mb-3">
+        <label class="form-label">products Quantity</label>
+        <input
+          type="number"
+          class="form-control"
+          name="productsQuantity"
+          formControlName="productsQuantity"
+          required
+        />
+      </div>
+      <div class="text-danger">
+        <span *ngIf="pQuantity && pQuantity.invalid && pQuantity.touched">
+          This Product Max Quantity is 10!!</span
+        >
+      </div>
+      <div class="from-group mb-3">
+        <label class="form-label">Description</label>
+        <textarea
+          type="textarea"
+          class="form-control"
+          name="productsDescription"
+          formControlName="productsDescription"
+          required
+        ></textarea>
+      </div>
+      <div class="text-danger">
+        <span
+          *ngIf="pDescription && pDescription.invalid && pDescription.touched"
+        >
+          Product Description Must be fill!!</span
+        >
+      </div>
+      <!-- [disabled]="addProductsForm.invalid" -->
+      <button
+        type="submit"
+        class="btn btn-success me-2"
+        (click)="registerProducts()"
+        *ngIf="!editMode"
+        [disabled]="addProductsForm.invalid"
+      >
+        Add
+      </button>
+
+      <button
+        type="button"
+        class="btn btn-success me-2"
+        *ngIf="editMode"
+        (click)="updatedata()"
+      >
+        Update
+      </button>
+
+      <button type="button" class="btn btn-danger me-2" (click)="cancel()">
+        Cancel
+      </button>
+    </form>
+  </div>
+  <span
+    ><b>{{ msg }}</b></span
+  >
+</div>

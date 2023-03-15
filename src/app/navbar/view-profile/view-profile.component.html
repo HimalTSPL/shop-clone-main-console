@@ -1,0 +1,89 @@
+<div class="container align-items-center rounded shadow my-3 py-3">
+  <h1>Welecome, {{ userName }}</h1>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">First Name</th>
+        <th scope="col">Last Name</th>
+        <th scope="col">Email</th>
+        <th scope="col">userName</th>
+        <th scope="col">
+          <div class="rounded shadow">
+            <ng-select class="dropdown-item" class="nav-link " [items]="userdetails" bindLabel="name" bindValue="id" [clearable]="false"
+              [formControl]="selectedDetails">
+            </ng-select>
+          </div>
+        </th>
+        <th scope="col">Password</th>
+        <th scope="col">CO-Password</th>
+        <th scope="col">Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of getUserList; let i = index">
+        <!-- <th scope="row"></th> -->
+        <td>{{ i }}</td>
+        <td>{{ item.firstName }}</td>
+        <td>{{ item.lastName }}</td>
+        <td>{{ item.email }}</td>
+        <td>{{ item.userName }}</td>
+        <td>{{ item[selectedDetails.value]? item[selectedDetails.value] :'-'}}</td>
+        <td>{{ item.password }}</td>
+        <td>{{ item.coPassword }}</td>
+        <td>
+          <!-- [routerLink]="['/edit-profile', item.userID]" -->
+          <button class="btn btn-success me-2" [routerLink]="['/edit-profile', item.userID]">
+            Edit
+          </button>
+          <button class="btn btn-danger" (click)="deleteData(item)">
+            Delete
+          </button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+
+  <div class=" container align-items-center rounded shadow my-3 py-3">
+    <form class="row g-3" [formGroup]="productsForm" (ngSubmit)="saveProducts()" novalidate>
+      <div class="col-auto">
+        <label for="staticEmail2">Category</label>
+        <input type="text" class="form-control" formControlName="category" placeholder="Product Category">
+        <!-- <button type="submit" class="btn btn-primary mb-3" >add</button>
+      <button type="submit" class="btn btn-primary mb-3">remove</button> -->
+      </div>
+      <table class="table table-bordered " formArrayName="details">
+        <tr>
+          <th colspan="3">Add Multiple Quantity:</th>
+          <th width="150px"><button type="button" (click)="addDetails()" class="btn btn-primary">Add More</button></th>
+        </tr>
+        <tr *ngFor="let quantity of detailss().controls; let i=index" [formGroupName]="i ">
+          <td>
+            <label for="inputPassword2">Name</label>
+            <input type="text" class="form-control" formControlName="name" placeholder="Name">
+          </td>
+          <td>
+            <label for="inputPassword2">Quantity</label>
+            <input type="number" class="form-control" formControlName="quantity" placeholder="Quantity">
+          </td>
+          <td>
+            <label for="inputPassword2">price</label>
+            <input type="number" class="form-control" formControlName="price" placeholder="price">
+          </td>
+          <td>
+            <label for="inputPassword2">Description</label>
+            <input type="text" class="form-control" formControlName="description" placeholder="Description">
+          </td>
+          <td>
+            <button (click)="removeDetails(i)" type="button" *ngIf="detailss().controls.length > 1"
+              class="btn btn-danger me-2">Remove</button>
+            <button (click)="copy(i)" type="button" class="btn btn-success">Copy</button>
+          </td>
+        </tr>
+      </table>
+      <button type="submit" class="btn btn-success">submit</button>
+    </form>
+  </div>
+</div>
